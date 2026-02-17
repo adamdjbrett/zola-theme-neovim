@@ -13,3 +13,14 @@ function exec_config() {
     }
   });
 }
+
+const keys = {
+  // "normal" keys are just keys typed on the page
+  // for exemple " " is when space is typed
+  normal: {},
+
+  // this is for keys when shift is pressed
+  shortcut: {},
+};
+
+const commands = {};
