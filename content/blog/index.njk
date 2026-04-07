@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+title: Blog
+pagination:
+  data: collections.posts
+  size: 6
+  alias: pagedPosts
+permalink: "{% if pagination.pageNumber > 0 %}/blog/page/{{ pagination.pageNumber + 1 }}/{% else %}/blog/{% endif %}"
+---
+<ul class="section h-feed">
+  {% set tabindex = -1 %}
+  <li class="section"><a href="../" tabindex="{{ tabindex }}">../</a></li>
+  {% set tabindex = tabindex - 1 %}
+  <li class="section"><a class="selected" href="./" tabindex="{{ tabindex }}">./</a></li>
+
+  {% for post in pagedPosts %}
+    {% set tabindex = tabindex - 1 %}
+    <li class="post h-entry">
+      <a class="u-url p-name" href="{{ post.url }}" tabindex="{{ tabindex }}">{{ post.data.title }}</a>
+      <time class="dt-published" datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+    </li>
+  {% endfor %}
+</ul>
+
+{% if pagination.href.previous or pagination.href.next %}
+<nav aria-label="Pagination">
+  <ul class="section">
+    {% if pagination.href.previous %}
+      <li class="section"><a href="{{ pagination.href.previous }}">← Newer</a></li>
+    {% endif %}
+    {% if pagination.href.next %}
+      <li class="section"><a href="{{ pagination.href.next }}">Older →</a></li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}

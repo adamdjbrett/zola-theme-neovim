@@ -1,0 +1,27 @@
+---
+permalink: /sitemap.xsl
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:s="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <xsl:output method="html" indent="yes"/>
+  <xsl:template match="/">
+    <html lang="en">
+      <head>
+        <meta charset="utf-8"/>
+        <title>Sitemap</title>
+      </head>
+      <body>
+        <h1>Sitemap</h1>
+        <ul>
+          <xsl:for-each select="s:urlset/s:url">
+            <li>
+              <a href="{s:loc}"><xsl:value-of select="s:loc"/></a>
+              <span> - <xsl:value-of select="s:lastmod"/></span>
+            </li>
+          </xsl:for-each>
+        </ul>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>

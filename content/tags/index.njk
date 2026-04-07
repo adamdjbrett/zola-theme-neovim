@@ -1,0 +1,16 @@
+---
+layout: layouts/base.njk
+title: Tags
+permalink: /tags/
+---
+<ul class="section">
+  {% set tabindex = -1 %}
+  <li class="section"><a href="../" tabindex="{{ tabindex }}">../</a></li>
+  {% set tabindex = tabindex - 1 %}
+  <li class="section"><a class="selected" href="./" tabindex="{{ tabindex }}">./</a></li>
+
+  {% for tag in collections.tagList %}
+    {% set tabindex = tabindex - 1 %}
+    <li class="section"><a href="/tags/{{ tag | slugify }}/" tabindex="{{ tabindex }}">{{ tag }}/</a></li>
+  {% endfor %}
+</ul>

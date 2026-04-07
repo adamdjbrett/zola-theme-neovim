@@ -1,5 +1,7 @@
 function exec(event) {
   let element = document.activeElement;
+  const customKeys =
+    typeof window !== "undefined" && window.keys ? window.keys : null;
 
   const key = event.key.toLocaleLowerCase();
   const is_page = element.classList.contains("page");
@@ -13,10 +15,11 @@ function exec(event) {
 
   if (event.shiftKey) {
     if (
-      typeof keys.shortcut != "undefined" &&
-      typeof keys.shortcut[key] === "function"
+      customKeys &&
+      customKeys.shortcut &&
+      typeof customKeys.shortcut[key] === "function"
     ) {
-      keys.shortcut[key](event, element);
+      customKeys.shortcut[key](event, element);
       return;
     }
 
@@ -41,10 +44,11 @@ function exec(event) {
     }
   } else {
     if (
-      typeof keys.normal != "undefined" &&
-      typeof keys.normal[key] === "function"
+      customKeys &&
+      customKeys.normal &&
+      typeof customKeys.normal[key] === "function"
     ) {
-      keys.normal[key](event, element);
+      customKeys.normal[key](event, element);
       return;
     }
 
@@ -100,7 +104,13 @@ function exec(event) {
 }
 
 function next_file(incrementer, element) {
-  const a = element.getElementsByClassName("selected")[0];
+  let a = element.getElementsByClassName("selected")[0];
+  if (!a) {
+    a = element.querySelector("a[tabindex]");
+    if (!a) return;
+    a.classList.add("selected");
+  }
+
   const index = parseInt(a.attributes.tabindex.value);
   const next_element = element.querySelector(
     `[tabindex='${index + incrementer}']`,

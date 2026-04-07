@@ -1,0 +1,28 @@
+---
+permalink: /feed/pretty-atom-feed.xsl
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:atom="http://www.w3.org/2005/Atom">
+  <xsl:output method="html" indent="yes" />
+  <xsl:template match="/">
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <title><xsl:value-of select="atom:feed/atom:title" /> Atom Feed</title>
+      </head>
+      <body>
+        <h1><xsl:value-of select="atom:feed/atom:title" /> Atom Feed</h1>
+        <p><xsl:value-of select="atom:feed/atom:subtitle" /></p>
+        <ul>
+          <xsl:for-each select="atom:feed/atom:entry">
+            <li>
+              <a href="{atom:link/@href}"><xsl:value-of select="atom:title" /></a>
+              <span> - <xsl:value-of select="atom:updated" /></span>
+            </li>
+          </xsl:for-each>
+        </ul>
+      </body>
+    </html>
+  </xsl:template>
+</xsl:stylesheet>

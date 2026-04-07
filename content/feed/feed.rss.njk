@@ -1,0 +1,23 @@
+---
+permalink: /feed/feed.rss
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>{{ metadata.title }}</title>
+    <link>{{ '/' | absoluteUrl(metadata.url) }}</link>
+    <description>{{ metadata.description }}</description>
+    <lastBuildDate>{% if collections.posts[0] %}{{ collections.posts[0].date | isoDate }}{% else %}{{ 'now' | isoDate }}{% endif %}</lastBuildDate>
+    <language>{{ metadata.language }}</language>
+    {% for post in collections.posts %}
+    <item>
+      <title>{{ post.data.title }}</title>
+      <link>{{ post.url | absoluteUrl(metadata.url) }}</link>
+      <guid>{{ post.url | absoluteUrl(metadata.url) }}</guid>
+      <pubDate>{{ post.date | readableDate('EEE, dd LLL yyyy HH:mm:ss') }} GMT</pubDate>
+      <description><![CDATA[{{ post.data.description or '' }}]]></description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

@@ -1,0 +1,31 @@
+title: neovim
+description: Eleventy 3.1.5 port of the original neovim theme.
+language: en
+url: https://example.com
+icon: /favicon.ico
+backgroundImage: /assets/background.jpg
+customCss: ""
+configJs: ""
+eleventyVersion: 3.1.5
+author:
+  name: 0xb0tm4n
+  email: 0xb0tm4n@proton.me
+  url: https://github.com/Super-Botman
+theme:
+  slug: neovim-theme
+  name: neovim
+  homepage: https://github.com/Super-Botman/neovim-theme
+  demo: https://super-botman.github.io
+  author: 0xb0tm4n
+  license: MIT
+navigation:
+  - label: README
+    url: /readme/
+  - label: About
+    url: /about/
+  - label: Contact
+    url: /contact/
+  - label: Blog
+    url: /blog/
+  - label: Tags
+    url: /tags/

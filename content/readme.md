@@ -1,7 +1,9 @@
-+++
-title="README"
-+++
-
+---
+layout: layouts/base.njk
+title: README
+permalink: /readme/
+usePageStyles: true
+---
 # README
 
 ## Table of content
@@ -11,21 +13,21 @@ title="README"
 
 ## Shortcuts
 
-`shift+h/l` to switch from file browser to file viewer 
+`shift+h/l` to switch from file browser to file viewer
 
-`j/k` to scroll through the file content 
+`j/k` to scroll through the file content
 
-`j/k` to go through files in file browser 
+`j/k` to go through files in file browser
 
-`enter` to open the currently selected file 
+`enter` to open the currently selected file
 
-`esc+command` see [## Commands](#Commands) 
+`esc+command` see [## Commands](#Commands)
 
-`shift+t/enter` to open the file in a new tab 
+`shift+t/enter` to open the file in a new tab
 
-`tab` to go to the next tab 
+`tab` to go to the next tab
 
-`shift+q` to close the current tab 
+`shift+q` to close the current tab
 
 ## Commands
 

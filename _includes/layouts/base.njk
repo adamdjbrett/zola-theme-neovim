@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="{{ metadata.language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ metadata.title }}</title>
+  <meta name="description" content="{{ description or metadata.description }}">
+  <meta name="generator" content="Eleventy v{{ metadata.eleventyVersion }}">
+
+  <link rel="icon" href="{{ metadata.icon }}" sizes="any">
+  <link rel="shortcut icon" href="{{ metadata.icon }}" type="image/x-icon">
+
+  <link rel="alternate" type="application/atom+xml" title="{{ metadata.title }} Atom" href="/feed/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="{{ metadata.title }} RSS" href="/feed/feed.rss">
+  <link rel="alternate" type="application/feed+json" title="{{ metadata.title }} JSON Feed" href="/feed/feed.json">
+  <link rel="alternate" type="text/plain" title="{{ metadata.title }} twtxt" href="/feed/twtxt.txt">
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "{{ metadata.title }}",
+      "description": "{{ metadata.description }}",
+      "inLanguage": "{{ metadata.language }}",
+      "url": "{{ '/' | absoluteUrl(metadata.url) }}"
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js" integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY=" crossorigin="anonymous" defer></script>
+  <script src="/js/index.js" defer></script>
+  <script src="/js/prompt.js" defer></script>
+  <script src="/js/keyboard.js" defer></script>
+  <script src="/js/tab.js" defer></script>
+  <script src="/js/commands.js" defer></script>
+  <script src="/js/config.js" defer></script>
+  {% if metadata.configJs %}
+  <script src="/{{ metadata.configJs }}"></script>
+  {% endif %}
+
+  {% if enableSearch %}
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+  <script src="/pagefind/pagefind-ui.js" defer></script>
+  <script defer>
+    window.addEventListener("DOMContentLoaded", () => {
+      if (!window.PagefindUI) return;
+      new window.PagefindUI({
+        element: "#search",
+        showSubResults: true,
+        showImages: false
+      });
+    });
+  </script>
+  {% endif %}
+
+  <link rel="stylesheet" href="/css/base.css">
+  {% if metadata.customCss %}
+  <link rel="stylesheet" href="{{ metadata.customCss }}">
+  {% endif %}
+  {% if usePageStyles %}
+  <link rel="stylesheet" href="/css/page.css">
+  {% endif %}
+</head>
+{% if metadata.backgroundImage %}
+<body onkeydown="exec(event)" style="background-image: url({{ metadata.backgroundImage }});">
+{% else %}
+<body onkeydown="exec(event)" style="background-image: url('/assets/background.jpg');">
+{% endif %}
+  <main>
+    <div class="files" id="files" tabindex="0">
+      {% include "components/files.njk" %}
+    </div>
+    <div class="viewer{% if usePageStyles %} page{% endif %}" id="viewer" tabindex="0">
+      <div class="tab">
+        {% include "components/tab.njk" %}
+      </div>
+      <div class="content" id="content">
+        {% if enableSearch %}
+        <div id="search"></div>
+        {% endif %}
+        {{ content | safe }}
+      </div>
+    </div>
+    <div class="prompt" id="terminal">
+      {% include "components/prompt.njk" %}
+    </div>
+  </main>
+</body>
+</html>

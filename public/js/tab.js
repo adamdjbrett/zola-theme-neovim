@@ -60,6 +60,7 @@ function del_tab(event) {
 function next_tab() {
   const element = document.getElementById("tabs");
   const a = element.getElementsByClassName("selected")[0];
+  if (!a) return;
 
   const previous_element = a.previousElementSibling;
   const next_element = a.nextElementSibling;
@@ -96,7 +97,7 @@ function render_tabs() {
       ? window.location.href
       : window.location.href + "/";
     const link = tab.link.endsWith("/") ? tab.link : tab.link + "/";
-    if (location == tab.link) {
+    if (location == link) {
       li.classList.add("selected");
     }
 

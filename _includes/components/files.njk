@@ -1,0 +1,50 @@
+{% set currentUrl = page.url or "/" %}
+{% set tabindex = -1 %}
+<ul>
+  {% for item in metadata.navigation %}
+    {% if item.url != "/blog/" and item.url != "/tags/" %}
+      {% set tabindex = tabindex - 1 %}
+      <li class="file">
+        <span>
+          <a href="{{ item.url }}" tabindex="{{ tabindex }}"{% if currentUrl | urlMatch(item.url) %} class="selected"{% endif %}>  {{ item.label }}</a>
+        </span>
+      </li>
+    {% endif %}
+  {% endfor %}
+
+  {% set tabindex = tabindex - 1 %}
+  <li class="folder">
+    <span>
+      <a href="/blog/" tabindex="{{ tabindex }}"{% if currentUrl | urlMatch('/blog/') %} class="selected"{% endif %}>  blog</a>
+    </span>
+    <ul>
+      {% for post in collections.posts %}
+        {% set tabindex = tabindex - 1 %}
+        <li class="file">
+          <span>└──
+            <a href="{{ post.url }}" tabindex="{{ tabindex }}"{% if currentUrl | urlMatch(post.url) %} class="selected"{% endif %}>  {{ post.data.title }}</a>
+          </span>
+        </li>
+      {% endfor %}
+    </ul>
+  </li>
+
+  {% if collections.tagList and collections.tagList.length %}
+    {% set tabindex = tabindex - 1 %}
+    <li class="folder">
+      <span>
+        <a href="/tags/" tabindex="{{ tabindex }}"{% if currentUrl | urlMatch('/tags/') %} class="selected"{% endif %}>  tags</a>
+      </span>
+      <ul>
+        {% for tag in collections.tagList %}
+          {% set tabindex = tabindex - 1 %}
+          <li class="file">
+            <span>└──
+              <a href="/tags/{{ tag | slugify }}/" tabindex="{{ tabindex }}"{% if currentUrl | urlMatch('/tags/' + (tag | slugify) + '/') %} class="selected"{% endif %}>  {{ tag }}</a>
+            </span>
+          </li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endif %}
+</ul>

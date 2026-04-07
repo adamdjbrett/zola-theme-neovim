@@ -1,78 +1,68 @@
-# Neovim like theme 
+# Neovim Theme (Eleventy Port)
 
-Neovim theme is a neovim like theme for zola.
+This repository is an **Eleventy 3.1.5 port** of the original `Super-Botman/neovim-theme`.
+
+- Original theme repo: <https://github.com/Super-Botman/neovim-theme>
+- Original demo: <https://super-botman.github.io>
+- License: GPL-3.0-or-later (unchanged)
 
 ![image](https://github.com/user-attachments/assets/0317c951-4975-4150-ac43-7faf4c57aa8b)
 
-exemple: [https://super-botman.github.io](https://super-botman.github.io)
+## What this port includes
 
-## Installation
+- Eleventy `3.1.5`
+- Nunjucks templates
+- Luxon date filters
+- Atom, RSS, JSON Feed, and twtxt feeds
+- Styled feed and sitemap XML via XSL
+- Microformats (`h-card`, `h-entry`)
+- JSON-LD (`WebSite`, `BlogPosting`)
+- Pagefind search indexing
+- Blog pagination and previous/next arrows
+- `metadata.yml` site data
+
+## Directory structure
+
+```text
+_data/
+_includes/
+content/
+css/
+public/
+scripts/
+```
+
+This layout follows the organizational pattern used by `eleventy-base-blog`.
+
+## Install
+
 ```bash
-cd themes
-git clone https://github.com/Super-Botman/neovim-theme.git
-mv neovim-theme/content/readme.md ../content
+npm install
 ```
 
-then enable it in your config
+## Run locally
 
-```toml
-theme = "neovim-theme"
+```bash
+npm start
 ```
 
-## Configuration
+## Build
 
-```toml
-[extra]
-######################
-# Mandatory settings #
-######################
-
-# set the name of the blog
-blog_name = "name"
-
-#####################
-# Optional settings #
-#####################
-
-# set the background image u want
-background_image = "/assets/background.jpg"
-
-# this parameter allow you to configure specific init functions/shortcuts and commands
-# the value has to be the path of you're config.js file
-config_js = "config.js"
-
-# allow you to include custom css into u're blog
-custom_css = "style.css"
+```bash
+npm run build
 ```
 
-```js
-const keys = {
-  // "normal" keys are just keys typed on the page
-  // for exemple " " is when space is typed
-  normal: {
-    " ": (event, element) => {
-      alert("u pressed space key");
-    },
-  },
+Build output goes to `_site/`.
 
-  // this is for keys when shift is pressed
-  shortcut: {},
-};
+## Site metadata
 
-const commands = {
-  // the key is used to specify the name of the command
-  test: (command) => {
-    alert("you entered 'test' command");
+All site metadata lives in:
 
-    // and then the return value with type and message
-    return {
-      type: "success", // "success" = green text, "error" = red text
-      message: "command executed", // the text to show in the command line
-    };
-  },
-};
-
-function custom_init() {
-  // here some code
-}
+```text
+content/_data/metadata.yml
 ```
+
+## Notes on original Zola usage
+
+The original Zola files and templates have been removed from this ported repository.
+If you need the original Zola implementation, use the upstream project linked above.
